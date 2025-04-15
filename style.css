@@ -25,37 +25,36 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-
- /* ========= Base / Desktop Styles ========= */
-.navbar16_container {
+/* ========= Base / Desktop Styles ========= */
+.navbar {
+  display: flex; /* Ensure flex layout is applied */
   flex-direction: column;
   align-items: stretch;
   padding: 0 15px;
 }
 
-.navbar16_logo-link {
+/* Logo Link */
+.navbar__logo-link {
   cursor: pointer;
   text-decoration: none;
   display: flex;
   align-items: center;
 }
 
-.navbar16_logo {
+/* Logo Image */
+.navbar__logo {
   max-height: 150px;
-  height: auto; /* Adjust height as needed */
-  width: auto;   /* Maintains aspect ratio */
+  height: auto;
+  width: auto;
 }
 
-.navbar16_wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.menu-toggle {
+/* Hide the toggle input by default */
+.navbar__toggle {
   display: none;
 }
-/* Desktop Navigation Menu */
-.navbar16_menu {
+
+/* Navigation Menu */
+.navbar__menu {
   display: none; /* Hidden by default */
   position: fixed;
   top: 0;
@@ -68,29 +67,28 @@ html, body {
   z-index: 99;
   flex-direction: column;
 }
-/* When checkbox is checked, display the menu */
-.menu-toggle:checked ~ .navbar16_menu {
+
+/* When the toggle is checked, display the menu */
+.navbar__toggle:checked ~ .navbar__menu {
   display: flex;
   opacity: 1;
 }
-.navbar16_menu-wrapper {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
 
-.navbar16_links-wrapper {
+/* Navigation Links List */
+.navbar__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly; /* Evenly distributes links vertically */
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
 }
 
-.navbar16_link {
-  flex: 1;
+/* Individual Navigation Link */
+.navbar__link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,35 +96,31 @@ html, body {
   color: #fff;
   font-size: 2rem;
   text-align: center;
+  text-decoration: none;
 }
 
-.navbar16_link::first-letter {
+/* Uppercase first letter */
+.navbar__link::first-letter {
   text-transform: uppercase;
 }
 
-.navbar16_link:hover {
+/* Hover state */
+.navbar__link:hover {
   border-color: #401722;
 }
 
-  .navbar16_menu-button {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 101;
-    display: block;
-    cursor: pointer;
-  }
-
-@media screen and (max-width: 960px) {
-  .navbar16_container {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0 15px;
-  }
+/* Toggle Button (Hamburger) */
+.navbar__toggle-button {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 101;
+  display: block;
+  cursor: pointer;
 }
 
 /* Hamburger Icon Styles */
-.menu-icon4 {
+.navbar__menu-icon {
   width: 24px;
   height: 24px;
   display: flex;
@@ -134,48 +128,29 @@ html, body {
   justify-content: space-around; /* evenly spaces the lines */
   align-items: center;
 }
-/* Individual Lines */
-.menu-icon4 .line {
+
+/* Individual Lines inside Hamburger Icon */
+.navbar__menu-icon .navbar__line {
   width: 30px;
   height: 3px;
   background: #ffffff; /* Contrast color */
 }
-.menu-icon4_wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-.menu-icon4_line-top-2,
-.menu-icon4_line-bottom-2 {
-  width: 24px;
-  height: 2px;
-  background: #000;
-}
-.menu-icon4_line-middle {
-  position: relative;
-  width: 24px;
-  height: 2px;
-  background: #000;
-  transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0);
-  transform-style: preserve-3d;
-}
 
 /* ========= Mobile Styles ========= */
 @media screen and (max-width: 960px) {
-  .navbar16_container {
+  .navbar {
     height: 80px;
     padding: 0 15px;
   }
   
-  /* Hide desktop menu and position mobile menu */
-  .navbar16_menu {
+  /* Mobile Navigation Menu */
+  .navbar__menu {
     display: none; /* hidden by default */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;  /* fill the entire viewport height */
+    height: 100vh;
     background: #131313;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -183,38 +158,38 @@ html, body {
     flex-direction: column;
   }
   
-  /* When active (e.g., via JavaScript toggle), show mobile menu */
-  .navbar16_menu.active {
+  /* Option to activate the mobile menu via JavaScript */
+  .navbar__menu.active {
     display: flex;
     opacity: 1;
     height: 60vh;  /* Adjust as needed */
     font-size: 1.6rem;
   }
   
-  .navbar16_links-wrapper {
+  .navbar__links {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Center links vertically */
     align-items: center;
     gap: 20px;             /* Adjust gap as needed */
     height: 100%;
-    padding: 20px 0; 
+    padding: 20px 0;
   }
   
-  .navbar16_link {
-    display: inline-block; /* Remove flex: 1 and full-width */
-  color: #fff;
-  font-size: 2rem;
-  text-align: center;
-  padding: 1rem 2rem;   /* Adjust padding for spacing */
+  .navbar__link {
+    display: inline-block; /* Remove full-width flex behavior */
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem 2rem;   /* Adjust padding for spacing */
   }
   
   /* Show hamburger menu on mobile */
-  .navbar16_menu-button {
-    display: block; /* Desktop: hidden */
-
+  .navbar__toggle-button {
+    display: block;
   }
 }
+
 
 /* Hero Section */
 .hero {
