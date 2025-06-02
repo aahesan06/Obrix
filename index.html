@@ -6,6 +6,7 @@
     <title>Scroll Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
   <body>
     <!-- Navbar Section -->
@@ -13,18 +14,18 @@
       <a href="#" class="navbar__logo-link">
         <img src="Root/logo1.png" alt="Logo" class="navbar__logo" />
       </a>
-      <input type="checkbox" id="menu-toggle" class="navbar__toggle" />
-      <label for="menu-toggle" class="navbar__toggle-button">
+      <button id="mobile-menu-button" class="navbar__toggle-button" aria-label="Open navigation menu">
         <div class="navbar__menu-icon">
-          <span class="navbar__line"></span>
-          <span class="navbar__line"></span>
-          <span class="navbar__line"></span>
+            <span class="navbar__line"></span>
+            <span class="navbar__line"></span>
+            <span class="navbar__line"></span>
         </div>
-      </label>
+      </button>
       <nav class="navbar__menu">
         <ul class="navbar__links">
+          <li class="navbar__item"><a href="#home" class="navbar__link">Home</a></li>
           <li class="navbar__item"><a href="#services" class="navbar__link">Services</a></li>
-          <li class="navbar__item"><a href="#team" class="navbar__link">Team</a></li>
+          <li class="navbar__item"><a href="#experience" class="navbar__link">Team</a></li>
           <li class="navbar__item"><a href="#contact" class="navbar__link">Contact Us</a></li>
         </ul>
       </nav>
@@ -34,12 +35,12 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero__container">
-        <h1 class="hero__heading">Why Obrix?</h1>
+        <h1 class="tagline">Why Obrix?</h1>
         <h2 class="hero__tagline">Stay one step ahead of cyber threats.</h2>
         <p class="hero__description">
           Obrix is a cybersecurity business that protects critical infrastructure through holistic security programs, proactive risk management, and advanced threat analytics.
         </p>
-        <button class="main_btn"><a href="#">Find out more</a></button>
+        <a href="#" class="main_btn">Find out more</a>
       </div>
     </section>
 
@@ -106,18 +107,38 @@
           <p class="about__description">
             Obrix stands apart with deep expertise in cybersecurity analytics and real-world threat intelligence. Our technical proficiency in risk modeling, combined with hands-on experience in data-driven security decisions, uniquely positions us to empower clients with top-tier cyber resilience.
           </p>
-          <button class="about__btn" role="button"><a href="#">Schedule Call</a></button>
+          <a href="#" class="about__btn" role="button">Schedule Call</a>
         </div>
         <div class="about__right">
           <div class="about__icon-list">
-            <!-- Icon items here -->
+            <div class="about__icon-item">
+              <div class="about__icon-wrapper">
+                <!-- Placeholder for an icon, e.g., from Font Awesome if available -->
+                <i class="fas fa-shield-alt"></i> 
+              </div>
+              <span class="about__icon-text">Placeholder Feature Text 1</span>
+            </div>
+            <div class="about__icon-item">
+              <div class="about__icon-wrapper">
+                <!-- Placeholder for an icon, e.g., from Font Awesome if available -->
+                <i class="fas fa-lightbulb"></i> 
+              </div>
+              <span class="about__icon-text">Placeholder Feature Text 2</span>
+            </div>
+            <div class="about__icon-item">
+              <div class="about__icon-wrapper">
+                <!-- Placeholder for an icon, e.g., from Font Awesome if available -->
+                <i class="fas fa-users"></i> 
+              </div>
+              <span class="about__icon-text">Placeholder Feature Text 3</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="main" id="sign-up">
+    <section class="main" id="experience">
       <div class="main__container">
         <div class="main__content">
           <h1>Our Experience</h1>
@@ -136,7 +157,7 @@
     <footer id="contact" class="contact-section">
       <div class="container">
         <div class="contact-header">
-          <span class="tagline">Contact us</span>
+          <div class="tagline">Contact us</div>
           <h2>Let's talk</h2>
           <p>To find out more, please email us.</p>
         </div>
@@ -147,6 +168,6 @@
       </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

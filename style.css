@@ -28,9 +28,10 @@ html, body {
 /* ========= Base / Desktop Styles ========= */
 .navbar {
   display: flex; /* Ensure flex layout is applied */
-  flex-direction: column;
-  align-items: stretch;
-  padding: 0 15px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
 }
 
 /* Logo Link */
@@ -55,22 +56,15 @@ html, body {
 
 /* Navigation Menu */
 .navbar__menu {
-  display: none; /* Hidden by default */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;  /* Full viewport height */
-  background: #131313;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 99;
-  flex-direction: column;
+  display: flex; /* Shown by default on desktop */
+  flex-direction: row; /* Links in a row */
+  align-items: center; /* Align items vertically */
 }
 
-/* When the toggle is checked, display the menu */
+/* When the toggle is checked, display the menu (This rule might be obsolete with JS toggle) */
+/* We'll leave it for now, but JS primarily handles .active class for mobile */
 .navbar__toggle:checked ~ .navbar__menu {
-  display: flex;
+  display: flex; 
   opacity: 1;
 }
 
@@ -79,12 +73,8 @@ html, body {
   list-style: none;
   margin: 0;
   padding: 0;
-  flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
+  flex-direction: row; /* Links in a row */
 }
 
 /* Individual Navigation Link */
@@ -92,11 +82,11 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1rem; /* Adjusted font size for desktop */
   text-align: center;
   text-decoration: none;
+  padding: 0 15px; /* Spacing for desktop links */
 }
 
 /* Uppercase first letter */
@@ -111,12 +101,14 @@ html, body {
 
 /* Toggle Button (Hamburger) */
 .navbar__toggle-button {
-  position: fixed;
+  position: fixed; /* Keep fixed for mobile if that's the design */
   top: 24px;
   right: 24px;
   z-index: 101;
-  display: block;
+  display: none; /* Hidden by default, shown in media query for mobile */
   cursor: pointer;
+  background: transparent; /* Ensure no default button styling interferes */
+  border: none; /* Ensure no default button styling interferes */
 }
 
 /* Hamburger Icon Styles */
@@ -177,16 +169,19 @@ html, body {
   }
   
   .navbar__link {
-    display: inline-block; /* Remove full-width flex behavior */
+    display: flex; /* Back to flex for centering text if needed, or keep inline-block */
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Full width for tappable area */
     color: #fff;
-    font-size: 2rem;
+    font-size: 2rem; /* Restore mobile font size */
     text-align: center;
     padding: 1rem 2rem;   /* Adjust padding for spacing */
   }
   
   /* Show hamburger menu on mobile */
   .navbar__toggle-button {
-    display: block;
+    display: block; /* This is correct for mobile */
   }
 }
 
@@ -194,10 +189,7 @@ html, body {
 /* Hero Section */
 .hero {
   background: transparent;
-  padding-top: 80px;
-  padding-left: 50px;
-  padding-right: 500px;
-  padding-bottom: 50px;
+  padding: 80px 20px; /* Adjusted padding for responsiveness */
   position: relative; 
   z-index: 2;
 }
@@ -208,24 +200,10 @@ html, body {
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 1200px;
-  margin: 0;
+  margin: 0 auto; /* Centering the container */
   height: 90%;
   text-align: left;
   padding: 30px;
-}
-
-.hero__heading {
-  background-color:#f1f458;
-  color: #0f2d4d;
-  text-transform: uppercase;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  margin-left: -4px;
-  padding: 12.8px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 1;
-  display: inline-block;
 }
 
 .hero__tagline {
@@ -256,7 +234,7 @@ html, body {
   align-self: flex-start;
   font-size: 1.8rem;
   padding: 1rem 2rem;
-  border: 2px solid var(--accent-color);
+  border: 2px solid var(--primary-color);
   background: transparent;
   color: var(--primary-color);
   border-radius: 10px;
@@ -350,10 +328,10 @@ h2 {
 
 .icon-wrapper {
   margin: 20px 0 12px 0;
-  font-size: 24px;
+  font-size: 24px; /* This font-size might be for text if there was any, not directly for SVG/img icon */
   font-weight: 600;
   line-height: 1.5;
-  color: var(--gray-500);
+  color: var(--accent-color); /* Changed from --gray-500 */
 }
 
 .service-icon {
@@ -363,10 +341,10 @@ h2 {
 
 .service-description {
   margin-top: 2rem;
-  font-size: 16px;
+  font-size: 1.2rem; /* Changed from 16px */
   font-weight: 400;
   line-height: 1.5;
-  color: var(--gray-500);
+  color: var(--light-text); /* Changed from --gray-500 */
 }
 
 .services h3 {
@@ -540,10 +518,7 @@ h2 {
 
 .main {
   background: transparent;
-  padding-top: 80px;
-  padding-left: 50px;
-  padding-right: 500px;
-  padding-bottom: 50px;
+  padding: 80px 20px; /* Adjusted padding for responsiveness */
   position: relative; 
   z-index: 2;
 }
@@ -554,7 +529,7 @@ h2 {
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 1200px;
-  margin: 0;
+  margin: 0 auto; /* Centering the container */
   height: 90%;
   text-align: left;
   padding: 30px;
@@ -618,6 +593,14 @@ h2 {
   }
 }
 
+/* Responsive adjustments for services list */
+@media screen and (max-width: 768px) {
+  .services-list {
+    grid-template-columns: 1fr; /* Stack to a single column */
+    gap: 20px; /* Adjust gap for single column layout */
+  }
+}
+
 
 /* Footer CSS */
 .contact-section {
@@ -657,4 +640,12 @@ h2 {
 a {
   color: inherit;
   text-decoration: underline;
+}
+
+/* Scrollspy highlight style */
+.navbar__link.highlight {
+  color: var(--primary-color); /* Or another distinct color */
+  font-weight: bold;
+  /* Add a bottom border or other visual cue if desired */
+  /* border-bottom: 2px solid var(--primary-color); */
 }
