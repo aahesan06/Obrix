@@ -4,14 +4,40 @@
   padding: 0;
   scroll-behavior: smooth;
 }
+
 :root {
+  /* === Existing Variables === */
   --font-main: 'Barlow', sans-serif;
   --blue-purple-900-bckgrd: #010118;
-    --primary-color: #f1f458;
-    --secondary-color: #0f2d4d;
-    --accent-color: #778da9;
-    --light-text: #f8f7f2;
-    --background-gradient: linear-gradient(135deg, #0f2d4d 0%, #1a3b6b 100%);
+  --primary-color: #f1f458;
+  --secondary-color: #0f2d4d;
+  --accent-color: #778da9;
+  --light-text: #f8f7f2;
+  --background-gradient: linear-gradient(135deg, #0f2d4d 0%, #1a3b6b 100%);
+  /* Ensure --gray-500 is defined if you use it, e.g.: */
+  /* --gray-500: #A0AEC0; */
+
+  /* === New Spacing Variables (Increased by ~20%) === */
+  --space-xxs: 0.6rem;      /* Was 0.5rem (8px), now ~9.6px */
+  --space-xs: 0.96rem;     /* Was 0.8rem (12.8px), now ~15.36px */
+  --space-15px: 1.125rem;  /* Was 0.9375rem (15px), now 18px */
+  --space-sm: 1.2rem;      /* Was 1rem (16px), now ~19.2px */
+  --space-title-hr: 1.44rem;/* Was 1.2rem (19.2px), now ~23.04px */
+  --space-20px: 1.5rem;    /* Was 1.25rem (20px), now 24px */
+  --space-btn-mobile-hr: 1.92rem; /* Was 1.6rem (25.6px), now ~30.72px */
+  --space-30px: 2.25rem;   /* Was 1.875rem (30px), now 36px */
+  --space-lg: 2.4rem;      /* Was 2rem (32px), now ~38.4px */
+  --space-50px: 3.75rem;   /* Was 3.125rem (50px), now 60px */
+  --space-80px: 6rem;      /* Was 5rem (80px), now 96px */
+  --space-100px: 7.5rem;   /* Was 6.25rem (100px), now 120px */
+
+  /* Special case for asymmetrical padding (Increased by ~20%) */
+  --hero-main-padding-right: 37.5rem; /* Was 31.25rem (500px), now 600px */
+
+  /* === Global Content Width & Gutters (will use updated space variables) === */
+  --inner-content-max-width: 1200px; /* Max width for content blocks within padded sections */
+  --content-gutter-wide: var(--space-50px); /* Main horizontal gutter for hero-like sections */
+  --content-gutter-responsive: var(--space-lg); /* Gutter for responsive adjustments */
 }
 
 html, body {
@@ -25,15 +51,14 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* ========= Base / Desktop Styles ========= */
+/* ========= Navbar Styles ========= */
 .navbar {
-  display: flex; /* Ensure flex layout is applied */
+  display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 0 15px;
+  padding: 0 var(--space-15px);
 }
 
-/* Logo Link */
 .navbar__logo-link {
   cursor: pointer;
   text-decoration: none;
@@ -41,26 +66,23 @@ html, body {
   align-items: center;
 }
 
-/* Logo Image */
 .navbar__logo {
   max-height: 100px;
   height: auto;
   width: auto;
 }
 
-/* Hide the toggle input by default */
 .navbar__toggle {
   display: none;
 }
 
-/* Navigation Menu */
 .navbar__menu {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;  /* Full viewport height */
+  height: 100vh;
   background: #131313;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -68,13 +90,11 @@ html, body {
   flex-direction: column;
 }
 
-/* When the toggle is checked, display the menu */
 .navbar__toggle:checked ~ .navbar__menu {
   display: flex;
   opacity: 1;
 }
 
-/* Navigation Links List */
 .navbar__links {
   list-style: none;
   margin: 0;
@@ -87,7 +107,6 @@ html, body {
   width: 100%;
 }
 
-/* Individual Navigation Link */
 .navbar__link {
   display: flex;
   align-items: center;
@@ -99,17 +118,14 @@ html, body {
   text-decoration: none;
 }
 
-/* Uppercase first letter */
 .navbar__link::first-letter {
   text-transform: uppercase;
 }
 
-/* Hover state */
 .navbar__link:hover {
   border-color: #401722;
 }
 
-/* Toggle Button (Hamburger) */
 .navbar__toggle-button {
   position: fixed;
   top: 24px;
@@ -119,109 +135,77 @@ html, body {
   cursor: pointer;
 }
 
-/* Hamburger Icon Styles */
 .navbar__menu-icon {
   width: 24px;
   height: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around; /* evenly spaces the lines */
+  justify-content: space-around;
   align-items: center;
 }
 
-/* Individual Lines inside Hamburger Icon */
 .navbar__menu-icon .navbar__line {
   width: 30px;
   height: 3px;
-  background: #ffffff; /* Contrast color */
+  background: #ffffff;
 }
 
-/* ========= Mobile Styles ========= */
+/* ========= Mobile Navbar Styles ========= */
 @media screen and (max-width: 960px) {
   .navbar {
     height: 80px;
-    padding: 0 15px;
   }
   
-  /* Mobile Navigation Menu */
-  .navbar__menu {
-    display: none; /* hidden by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #131313;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    z-index: 99;
-    flex-direction: column;
-  }
-  
-  /* Option to activate the mobile menu via JavaScript */
   .navbar__menu.active {
     display: flex;
     opacity: 1;
-    height: 60vh;  /* Adjust as needed */
+    height: 60vh;
     font-size: 1.6rem;
   }
   
   .navbar__links {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center links vertically */
-    align-items: center;
-    gap: 20px;             /* Adjust gap as needed */
+    gap: 20px;
     height: 100%;
-    padding: 20px 0;
+    padding: var(--space-20px) 0;
   }
   
   .navbar__link {
-    display: inline-block; /* Remove full-width flex behavior */
-    color: #fff;
-    font-size: 2rem;
-    text-align: center;
-    padding: 1rem 2rem;   /* Adjust padding for spacing */
-  }
-  
-  /* Show hamburger menu on mobile */
-  .navbar__toggle-button {
-    display: block;
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
   }
 }
 
 
-/* Hero Section */
-.hero {
+/* ========= Hero Section ========= */
+.hero { 
   background: transparent;
-  padding-top: 80px;
-  padding-left: 50px;
-  padding-right: 500px;
-  padding-bottom: 50px;
+  padding-top: var(--space-80px);
+  padding-left: var(--content-gutter-wide); 
+  padding-right: var(--hero-main-padding-right); 
+  padding-bottom: var(--space-50px);
   position: relative; 
   z-index: 2;
 }
 
-.hero__container {
+.hero__container { 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 1200px;
-  margin: 0;
+  max-width: var(--inner-content-max-width); 
+  margin: 0; 
   height: 90%;
   text-align: left;
-  padding: 30px;
+  padding: var(--space-30px); 
 }
 
 .hero__heading {
-  background-color:#f1f458;
-  color: #0f2d4d;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   text-transform: uppercase;
   border-radius: 4px;
   margin-bottom: 8px;
-  margin-left: -4px;
-  padding: 12.8px;
+  padding: var(--space-xs);
   font-size: 40px;
   font-weight: 600;
   line-height: 1;
@@ -229,7 +213,7 @@ html, body {
 }
 
 .hero__tagline {
-  color: #f1f458;
+  color: var(--primary-color);
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 0;
@@ -237,25 +221,25 @@ html, body {
   font-weight: 800;
   line-height: 1;
 }
+
 .hero__description {
-  color: #f8f7f2;
+  color: var(--light-text);
   display: block;
   font-size: 1.7rem;
   font-weight: 400;
-  padding-top: 20px;
-  background-size: 100%;
-  word-wrap: break-word; /* Breaks long words to prevent overflow */
-  overflow-wrap: break-word; /* Ensures overflow text is broken into lines */
-  white-space: normal; /* Allows text to wrap to the next line */
-  max-width: 800px; /* Adjust this value as needed */
+  padding-top: var(--space-20px);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 800px; 
   margin-bottom: 50px;
   letter-spacing: 1px;
 }
 
-.main_btn{
+.main_btn {
   align-self: flex-start;
   font-size: 1.8rem;
-  padding: 1rem 2rem;
+  padding: var(--space-sm) var(--space-lg);
   border: 2px solid var(--accent-color);
   background: transparent;
   color: var(--primary-color);
@@ -266,34 +250,34 @@ html, body {
   transition: color 0.35s, transform 0.35s;
 }
 
-/* Services Section */
-
-.services {
-  padding: 100px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ========= Services Section ========= */
+.services { 
   background: transparent;
-  text-align: left;
+  text-align: left; 
+  padding-top: var(--space-100px);
+  padding-bottom: var(--space-100px);
+  padding-left: var(--content-gutter-wide); 
+  padding-right: var(--content-gutter-wide); 
 }
 
-.services-header {
+.services-header { 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-start; 
   justify-content: flex-start;
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
+  gap: 20px; 
+  width: 100%; 
+  max-width: var(--inner-content-max-width); 
+  margin: 0; 
+  margin-bottom: var(--space-lg); 
 }
 
 .tagline {
-  background-color:#f1f458;
-  color: #0f2d4d;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   text-transform: uppercase;
   border-radius: 4px;
-  margin-left: -4px;
-  padding: 12.8px;
+  padding: var(--space-xs);
   font-size: 40px;
   font-weight: 600;
   line-height: 1;
@@ -301,7 +285,7 @@ html, body {
 }
 
 h2 {
-  color: #f1f458;
+  color: var(--primary-color);
   text-transform: uppercase;
   font-size: 3rem;
   font-weight: 700;
@@ -310,36 +294,33 @@ h2 {
   margin-bottom: 0;
 }
 
-.services-intro {
-  color: #f8f7f2;
+.services-intro { 
+  color: var(--light-text);
   display: block;
   font-size: 1.7rem;
   font-weight: 400;
-  padding-top: 20px;
-  background-size: 100%;
-  word-wrap: break-word; /* Breaks long words to prevent overflow */
-  overflow-wrap: break-word; /* Ensures overflow text is broken into lines */
-  white-space: normal; /* Allows text to wrap to the next line */
-  max-width: 800px; /* Adjust this value as needed */
-  margin-bottom: 50px;
+  padding-top: var(--space-20px);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 800px; 
   letter-spacing: 1px;
 }
 
-
-.services-list {
+.services-list { 
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 25px;
   width: 100%;
-  max-width: 1000px;
-  margin-bottom: 37px;
+  max-width: var(--inner-content-max-width); 
+  margin: 0; 
 }
 
 .service-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 30px;
+  padding: var(--space-30px);
   border: 1px solid #fff3;
   border-radius: 20px;
   background-color: #0003;
@@ -372,36 +353,41 @@ h2 {
 .services h3 {
   font-size: 2rem;
 }
-.services p {
+.services p { 
   font-size: 1.3rem;
 }
 
-/* About Section */
-.about {
-  padding: 50px 0;
+/* ========= About Section ========= */
+.about { 
   background: transparent;
+  padding-top: var(--space-50px);
+  padding-bottom: var(--space-50px);
+  padding-left: var(--content-gutter-wide); 
+  padding-right: var(--content-gutter-wide); 
 }
 
-.about__container {
+.about__container { 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  align-items: center;
+  width: 100%; 
+  max-width: var(--inner-content-max-width); 
+  margin: 0; 
+  align-items: center; 
   gap: 2rem;
   opacity: 0;
   animation: fadeIn 1s forwards;
+  text-align: left; 
 }
 @keyframes fadeIn {
   to { opacity: 1; }
 }
 
-/* Left Section */
 .about__left {
   display: flex;
   flex-direction: column;
+  align-items: flex-start; 
   gap: 1.5rem;
+  text-align: left; 
 }
 
 .about__header {
@@ -413,7 +399,7 @@ h2 {
   color: var(--secondary-color);
   text-transform: uppercase;
   border-radius: 4px;
-  padding: 1rem 1.2rem;
+  padding: var(--space-sm) var(--space-title-hr);
   font-size: 3rem;
   display: inline-block;
 }
@@ -430,14 +416,13 @@ h2 {
   font-size: 1.7rem;
   letter-spacing: 0.5px;
   max-width: 800px;
-  color: var(--light-text)
+  color: var(--light-text);
 }
 
-/* Button with Creative Hover */
 .about__btn {
-  align-self: flex-start;
+  align-self: flex-start; 
   font-size: 1.8rem;
-  padding: 1rem 2rem;
+  padding: var(--space-sm) var(--space-lg);
   border: 2px solid var(--primary-color);
   background: transparent;
   color: var(--primary-color);
@@ -463,7 +448,6 @@ h2 {
   width: 100%;
   height: 100%;
   background: var(--primary-color);
-  color: var(--accent-color);
   z-index: 1;
   transition: left 0.35s;
 }
@@ -477,12 +461,13 @@ h2 {
   left: 0;
 }
 
-/* Right Section */
 .about__right {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; 
+  align-items: flex-start; 
   animation: slideIn 1s forwards;
   opacity: 0;
+  text-align: left; 
 }
 
 @keyframes slideIn {
@@ -496,10 +481,10 @@ h2 {
   }
 }
 
-/* Icon List */
 .about__icon-list {
   display: flex;
   flex-direction: column;
+  align-items: flex-start; 
   gap: 2rem;
 }
 
@@ -522,7 +507,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: var(--space-sm);
   flex-shrink: 0;
   transition: border-color 0.3s;
 }
@@ -536,28 +521,27 @@ h2 {
   color: var(--light-text);
 }
 
-/* Featrues Section */
-
-.main {
+/* ========= Features Section (using .main class) ========= */
+.main { 
   background: transparent;
-  padding-top: 80px;
-  padding-left: 50px;
-  padding-right: 500px;
-  padding-bottom: 50px;
+  padding-top: var(--space-80px);
+  padding-left: var(--content-gutter-wide); 
+  padding-right: var(--hero-main-padding-right); 
+  padding-bottom: var(--space-50px);
   position: relative; 
   z-index: 2;
 }
 
-.main__container {
+.main__container { 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 1200px;
-  margin: 0;
+  max-width: var(--inner-content-max-width); 
+  margin: 0; 
   height: 90%;
   text-align: left;
-  padding: 30px;
+  padding: var(--space-30px); 
 }
 
 .main__content h1 {
@@ -565,7 +549,7 @@ h2 {
   color: var(--secondary-color);
   text-transform: uppercase;
   border-radius: 4px;
-  padding: 1rem 1.2rem;
+  padding: var(--space-sm) var(--space-title-hr);
   font-size: 3rem;
   display: inline-block;
 }
@@ -574,40 +558,68 @@ h2 {
   font-size: 1.7rem;
   letter-spacing: 0.5px;
   max-width: 800px;
-  color: var(--light-text)
+  color: var(--light-text);
 }
 
-/* Responsive Adjustments */
+/* ========= Responsive Adjustments ========= */
 @media screen and (max-width: 1100px) {
   .about__container {
-    grid-template-columns: 1fr;
-    text-align: center;
+    grid-template-columns: 1fr; 
   }
   .about__left,
   .about__right {
-    justify-content: center;
+    align-items: flex-start; 
+    width: 100%; 
+    text-align: left; 
+  }
+   .about__right { 
+    justify-content: flex-start; 
   }
   .about__btn {
-    align-self: center;
+    align-self: flex-start; 
   }
   .about__right {
     margin-top: 2rem;
   }
+
+  /* Adjust padding for all main sections to responsive gutter */
+  .hero, .main, .services, .about, .contact-section { 
+    padding-left: var(--content-gutter-responsive); 
+    padding-right: var(--content-gutter-responsive); 
+  }
+  /* Allow inner containers to fill the new responsive gutter */
+  .hero__container, 
+  .main__container, 
+  .services-header, 
+  .services-list, 
+  .about__container,
+  .contact-section .container { 
+    align-items: flex-start; 
+    text-align: left;    
+    max-width: none; 
+  }
+  .hero__heading, .main__content h1 { 
+    margin-left: 0; 
+  }
 }
 
 @media screen and (max-width: 480px) {
-  .about__title {
+  :root { 
+    --content-gutter-responsive: var(--space-20px); 
+  }
+
+  .about__title, .main__content h1 {
     font-size: 2.5rem;
   }
   .about__subtitle {
     font-size: 2.5rem;
   }
-  .about__description {
+  .about__description, .main__content p, .hero__description, .services-intro {
     font-size: 1.4rem;
   }
-  .about__btn {
+  .about__btn, .main_btn {
     font-size: 1.6rem;
-    padding: 0.8rem 1.6rem;
+    padding: var(--space-xs) var(--space-btn-mobile-hr);
   }
   .about__icon-wrapper {
     width: 4.5rem;
@@ -616,38 +628,51 @@ h2 {
   .about__icon-text {
     font-size: 1.3rem;
   }
+
+  .services-list {
+    grid-template-columns: 1fr;
+  }
+  .tagline {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
 }
 
 
-/* Footer CSS */
-.contact-section {
-  color: #f8f7f2;
+/* ========= Footer CSS / Contact Section ========= */
+.contact-section { 
+  color: var(--light-text);
   font-size: 1rem;
   line-height: 1.5;
-  display: grid;
   min-height: 50vh;
-  padding: 2rem 1rem;
+  padding-top: var(--space-lg);    
+  padding-bottom: var(--space-lg); 
+  padding-left: var(--content-gutter-wide); 
+  padding-right: var(--content-gutter-wide);
 }
 
-.container {
-  max-width: 80rem;
+.container { 
+  max-width: var(--inner-content-max-width); 
   width: 100%;
-  margin: 0 auto;
+  margin: 0; 
+  padding: 0; 
 }
 
 .contact-header {
-  max-width: 48rem;
+  max-width: 48rem; 
   margin-bottom: 2rem;
 }
 
-.tagline {
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
+.contact-header .tagline {
+  font-size: 1.5rem;
+  padding: var(--space-xxs) var(--space-xs);
 }
 
+
 .contact-info {
-  padding: 0.5rem 0;
+  padding: var(--space-xxs) 0;
 }
 
 .contact-info h3 {
