@@ -52,5 +52,20 @@ const hideMobileMenu = () => {
   }
 };
 
-menuLinks.addEventListener('click', hideMobileMenu);
-navLogo.addEventListener('click', hideMobileMenu);
+m<script>
+const toggle = document.querySelector('.nav__toggle');
+const overlay = document.querySelector('.nav__overlay');
+
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('open');
+  overlay.classList.toggle('active');
+});
+
+// Optional: close overlay when a link is clicked
+document.querySelectorAll('.nav__overlay a').forEach(link => {
+  link.addEventListener('click', () => {
+    toggle.classList.remove('open');
+    overlay.classList.remove('active');
+  });
+});
+</script>
