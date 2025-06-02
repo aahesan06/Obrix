@@ -9,31 +9,38 @@
   </head>
   <body>
     <!-- Navbar Section -->
-    <header class="navbar">
-      <a href="#" class="navbar__logo-link">
-        <img src="Root/logo1.png" alt="Logo" class="navbar__logo" />
-      </a>
-      <input type="checkbox" id="menu-toggle" class="navbar__toggle" />
-      <label for="menu-toggle" class="navbar__toggle-button">
-        <div class="navbar__menu-icon">
-          <span class="navbar__line"></span>
-          <span class="navbar__line"></span>
-          <span class="navbar__line"></span>
-        </div>
-      </label>
-      <nav class="navbar__menu" aria-label="Main navigation">
-        <ul class="navbar__links">
-          <li class="navbar__item"><a href="#services" class="navbar__link">Services</a></li>
-          <li class="navbar__item"><a href="#about" class="navbar__link">About</a></li>
-          <li class="navbar__item"><a href="#contact" class="navbar__link">Contact Us</a></li>
-        </ul>
-      </nav>
+    <header class="nav">
+      <div class="nav__container">
+        <a href="#" class="nav__logo">
+          <img src="Root/logo1.png" alt="Obrix Logo" />
+        </a>
+        <nav class="nav__links">
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a href="#contact" class="nav__cta">Let's Talk</a>
+        <button class="nav__toggle" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="nav__overlay">
+        <nav class="nav__overlay-links">
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="#contact" class="nav__cta">Let's Talk</a>
+        </nav>
+      </div>
     </header>
+    
     
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-      <div class="hero__container">
+    <section class="hero section" id="home">
+      <div class="hero__container container ">
         <h1 class="hero__heading">Why Obrix?</h1>
         <h2 class="hero__tagline">Stay one step ahead of cyber threats.</h2>
         <p class="hero__description">
@@ -79,7 +86,7 @@
       </div>
       <h3>Risk Management</h3>
       <p class="service-description">
-        Identify, evaluate, and mitigate cybersecurity risks to safeguard your organization's critical operations and data.
+        Identify, evaluate, and mitigate cybersecurity risks to safeguard your organization’s critical operations and data.
       </p>
     </article>
 
