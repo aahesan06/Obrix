@@ -1,0 +1,16 @@
+{
+  "name": "obrix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^4.1.8"
+  },
+  "scripts": {
+    "build-css": "tailwindcss -i ./input.css -o ./style.css --watch"
+  },
+  "author": "",
+  "license": "ISC"
+}
