@@ -4,156 +4,580 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scroll Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<style type="text/tailwindcss">
+  @layer base {
+    :root {
+      /* Colors */
+      --primary-color: #f1f458;
+      --secondary-color: #0f2d4d;
+      --accent-color: #778da9;
+      --light-text: #f8f7f2;
+      --gray-500: #9CA3AF;
+      --blue-purple-900-bckgrd: #010118;
+    }
+    html, body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--blue-purple-900-bckgrd);
+      color: var(--light-text);
+      line-height: 1.6;
+    }
+    body {
+      background: linear-gradient(135deg, #010118 0%, #0a0a1e 50%, #1a1a2e 100%);
+      min-height: 100vh;
+    }
+  }
+  @layer components {
+    .cyber-btn {
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+      box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+    }
+    .cyber-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .cyber-btn:hover::before {
+      left: 100%;
+    }
+    .cyber-btn:hover {
+      box-shadow: 0 4px 16px 0 rgba(0,0,0,0.18);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .cyber-card {
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+      background: rgba(0,0,0,0.25);
+      padding: 2rem;
+    }
+    .cyber-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(241, 244, 88, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      border-radius: 1rem;
+    }
+    .cyber-card:hover::before {
+      opacity: 1;
+    }
+    .cyber-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+    }
+    .about__btn {
+      transition-property: color, transform, background-color;
+      transition-duration: 0.35s;
+      transition-timing-function: ease-in-out;
+    }
+    .about__btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary-color);
+      z-index: 1;
+      transition-property: left;
+      transition-duration: 0.35s;
+      transition-timing-function: ease-in-out;
+    }
+    .about__btn:hover::after {
+      left: 0;
+    }
+  }
+</style>
+    <style>
+      #animation-canvas {
+        width: 650px;
+        height: 260px;
+        max-width: 100%;
+        background: transparent;
+        display: block;
+        pointer-events: none;
+      }
+      @media (max-width: 768px) {
+        #animation-canvas {
+          width: 380px;
+          height: 140px;
+        }
+      }
+    </style>
   </head>
-  <body>
-    <!-- Navbar Section -->
-    <header class="nav">
-      <div class="nav__container">
-        <a href="#" class="nav__logo">
-          <img src="Root/logo1.png" alt="Obrix Logo" />
+  <body class="min-h-screen">
+    <header class="sticky top-0 z-50 w-full bg-[rgba(1,1,24,0.85)] backdrop-blur-md shadow-lg pl-6">
+      <div class="pl-6 h-[80px] flex items-center justify-between w-full">
+        <a href="#" class="flex items-center shrink-0">
+          <img src="Root/logo1.png" alt="Obrix Logo" class="h-[62px] max-w-[238px] object-contain" />
         </a>
-        <nav class="nav__links">
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+        <nav class="hidden md:flex items-center space-x-10 ml-auto">
+          <a href="#services" class="text-[var(--light-text)] hover:text-[var(--primary-color)] font-semibold text-base transition-colors duration-200 px-2 py-1 rounded-md hover:bg-[rgba(241,244,88,0.08)]">What</a>
+          <a href="#about" class="text-[var(--light-text)] hover:text-[var(--primary-color)] font-semibold text-base transition-colors duration-200 px-2 py-1 rounded-md hover:bg-[rgba(241,244,88,0.08)]">Why</a>
+          <a href="#contact" class="text-[var(--light-text)] hover:text-[var(--primary-color)] font-semibold text-base transition-colors duration-200 px-2 py-1 rounded-md hover:bg-[rgba(241,244,88,0.08)]">
+            <span>Contact Us</span>
+          </a>
         </nav>
-        <a href="#contact" class="nav__cta">Let's Talk</a>
-        <button class="nav__toggle" aria-label="Open menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      <div class="nav__overlay">
-        <nav class="nav__overlay-links">
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="#contact" class="nav__cta">Let's Talk</a>
-        </nav>
+        <div class="flex items-center space-x-4">
+        </div>
       </div>
     </header>
-    
-    
-
+  
     <!-- Hero Section -->
-    <section class="hero section" id="home">
-      <div class="hero__container container ">
-        <h1 class="hero__heading">Why Obrix?</h1>
-        <h2 class="hero__tagline">Stay one step ahead of cyber threats.</h2>
-        <p class="hero__description">
-          Obrix is a cybersecurity business that protects critical infrastructure through holistic security programs, proactive risk management, and advanced threat analytics.
-        </p>
-        <button class="main_btn"><a href="#">Find out more</a></button>
+    <section 
+      id="home"
+      class="hero section bg-transparent py-20 px-0 pl-6 relative z-[2] w-full"
+    >
+      <div class="flex flex-col md:flex-row justify-start items-center text-left space-y-8 md:space-y-0 md:space-x-8 w-full pl-6">
+        <div class="flex-1 flex flex-col items-start">
+          <h1 
+            class="bg-[var(--primary-color)] text-[var(--secondary-color)] uppercase rounded-md mb-2 px-2 py-1 text-2xl md:text-3xl font-semibold leading-none inline-block shadow"
+          >
+            Why Obrix?
+          </h1>
+          <h2 
+            class="text-[var(--primary-color)] uppercase mt-0 mb-0 text-5xl md:text-6xl font-extrabold leading-none"
+          >
+            Stay one step ahead of cyber threats.
+          </h2>
+          <p 
+            class="text-[var(--light-text)] text-xl md:text-2xl pt-12 pb-12 w-full tracking-wide"
+          >
+            Obrix is a cybersecurity business that protects critical infrastructure through holistic security programs, proactive risk management, and advanced threat analytics.
+          </p>
+          <a 
+            href="#services" 
+            class="main_btn cyber-btn self-start text-lg md:text-xl px-8 py-3 border-2 border-[var(--accent-color)] bg-transparent text-[var(--primary-color)] rounded-lg relative cursor-pointer overflow-hidden transition-all duration-300 hover:bg-[var(--primary-color)] hover:text-[var(--secondary-color)] hover:scale-105 shadow mt-8"
+          >
+            Find out more
+          </a>
+        </div>
+        <canvas id="animation-canvas"></canvas>
       </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services" id="services">
-      <header class="services-header">
-        <div class="tagline">Services</div>
-        <h2>What We Can Do for You</h2>
-        <p class="services-intro">
-          We help organizations make informed decisions to safeguard critical assets and operations.
+    <section 
+      class="services bg-transparent text-left pt-20 px-0 pl-6 relative" 
+      id="services"
+    >
+      <header class="mb-12 pl-6 relative z-10">
+        <div 
+          class="bg-[var(--primary-color)] text-[var(--secondary-color)] uppercase rounded-md px-2 py-1 text-2xl md:text-3xl font-semibold inline-block shadow mb-2"
+        >
+          Services
+        </div>
+        <h2 
+          class="text-[var(--primary-color)] uppercase text-4xl md:text-5xl font-bold mt-4 mb-2" 
+        >
+          What We Can Do for You
+        </h2>
+        <p 
+          class="text-[var(--light-text)] text-xl md:text-2xl pt-4 w-full tracking-wide"
+        >
+          We provide the strategic guidance necessary to shield critial assets and operations from emerging cyber threats
         </p>
       </header>
-      <div class="services-list">
-    <article class="service-item">
-      <div class="icon-wrapper">
-        <img src="Root/1.svg" loading="lazy" alt="Critical Infrastructure Protection Icon" class="service-icon">
-      </div>
-      <h3>Critical Infrastructure Protection</h3>
-      <p class="service-description">
-       We secure vital systems like power grids, pipelines, and industrial controls against cyber threats through risk assessments, real-time monitoring, and compliance solutions.
-      </p>
-    </article>
-
-    <article class="service-item">
-      <div class="icon-wrapper">
-        <img src="Root/2.png" loading="lazy" alt="Operational Technology Assessments Icon" class="service-icon">
-      </div>
-      <h3>Operational Technology Assessments</h3>
-      <p class="service-description">
-        Comprehensive security assessments for industrial control systems (ICS) and SCADA environments to ensure resilience against cyber threats.
-      </p>
-    </article>
-
-    <article class="service-item">
-      <div class="icon-wrapper">
-        <img src="Root/3.png" loading="lazy" alt="Risk Management Icon" class="service-icon">
-      </div>
-      <h3>Risk Management</h3>
-      <p class="service-description">
-        Identify, evaluate, and mitigate cybersecurity risks to safeguard your organization’s critical operations and data.
-      </p>
-    </article>
-
-    <article class="service-item">
-      <div class="icon-wrapper">
-        <img src="Root/4.png" loading="lazy" alt="Compliance Audits Icon" class="service-icon">
-      </div>
-      <h3>Compliance Audits</h3>
-      <p class="service-description">
-        Ensure adherence to industry regulations and cybersecurity frameworks through thorough compliance assessments and audits.
-      </p>
-    </article>
-  </div>
-</section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-      <div class="about__container">
-        <div class="about__left">
-          <header class="about__header">
-            <h1 class="about__title">Track Record</h1>
-            <h2 class="about__subtitle">Many claim to protect.<br>Few have succeeded.</h2>
-          </header>
-          <p class="about__description">
-            Obrix stands apart with deep expertise in cybersecurity analytics and real-world threat intelligence. Our technical proficiency in risk modeling, combined with hands-on experience in data-driven security decisions, uniquely positions us to empower clients with top-tier cyber resilience.
-          </p>
-          <button class="about__btn" role="button"><a href="#">Schedule Call</a></button>
-        </div>
-        <div class="about__right">
-          <div class="about__icon-list">
-            <!-- Icon items here -->
+      <div class="divide-y divide-gray-700 w-full pl-6 relative z-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-12 py-12 w-full">
+          <!-- Service 1 -->
+          <div class="flex md:col-span-1 items-start w-full">
+            <span class="text-4xl md:text-5xl font-extrabold text-white mr-8">1.</span>
+            <div class="flex-1">
+              <h3 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Critical Infrastructure Protection</h3>
+              <p class="text-base md:text-lg text-gray-400">
+                We secure vital systems like power grids, pipelines, and industrial controls against cyber threats through risk assessments, real-time monitoring, and compliance solutions.
+              </p>
+            </div>
+          </div>
+          <!-- Service 2 -->
+          <div class="flex md:col-span-1 items-start w-full">
+            <span class="text-4xl md:text-5xl font-extrabold text-white mr-8">2.</span>
+            <div class="flex-1">
+              <h3 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Operational Technology Assessments</h3>
+              <p class="text-base md:text-lg text-gray-400">
+                Comprehensive security assessments for industrial control systems (ICS) and SCADA environments to ensure resilience against cyber threats.
+              </p>
+            </div>
+          </div>
+          <!-- Service 3 -->
+          <div class="flex md:col-span-1 items-start w-full">
+            <span class="text-4xl md:text-5xl font-extrabold text-white mr-8">3.</span>
+            <div class="flex-1">
+              <h3 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Risk Management</h3>
+              <p class="text-base md:text-lg text-gray-400">
+                Identify, evaluate, and mitigate cybersecurity risks to safeguard your organization's critical operations and data.
+              </p>
+            </div>
+          </div>
+          <!-- Service 4 -->
+          <div class="flex md:col-span-1 items-start w-full">
+            <span class="text-4xl md:text-5xl font-extrabold text-white mr-8">4.</span>
+            <div class="flex-1">
+              <h3 class="text-2xl md:text-3xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Compliance Audits</h3>
+              <p class="text-base md:text-lg text-gray-400">
+                Ensure adherence to industry regulations and cybersecurity frameworks through thorough compliance assessments and audits.
+              </p>
+            </div>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Flywheel Section -->
+    <section class="relative w-full pt-0 sm:pt-4 pb-16 sm:pb-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Full-width line and textbox at screen edge -->
+        <div class="w-screen flex items-center mb-20 sm:mb-24 relative left-1/2 -translate-x-1/2">
+          <div class="flex-grow h-px border-t border-gray-300/40"></div>
+          <div class="inline-block border border-gray-300/40 rounded-xl bg-white/10 backdrop-blur px-6 py-4 shadow z-10" style="backdrop-filter: blur(8px);">
+            <span class="text-2xl md:text-3xl font-semibold text-white">Our Cyber Defense Framework</span>
+          </div>
+          <div class="flex-grow h-px border-t border-gray-300/40"></div>
+        </div>
+    
+        <!-- Flywheel Container - Reduced max-width for smaller size -->
+        <div class="relative w-full max-w-xl lg:max-w-2xl mx-auto">
+          <div class="relative w-full aspect-square">
+            
+            <!-- Outer Arcs with Animated Spark -->
+            <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-full h-full overflow-visible" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- Filter for the glowing spark effect -->
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                         <!-- The invisible path for the animation to follow -->
+                        <path id="motionPath" d="M 256, 32 a 224,224 0 1,1 0,448 a 224,224 0 1,1 0,-448" fill="none" />
+                    </defs>
+
+                    <!-- The static colored arcs -->
+                    <path d="M 256 32 A 224 224 0 0 1 480 256" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+                    <path d="M 480 256 A 224 224 0 0 1 256 480" stroke="#34d399" stroke-width="8" stroke-linecap="round" />
+                    <path d="M 256 480 A 224 224 0 0 1 32 256" stroke="#f87171" stroke-width="8" stroke-linecap="round" />
+                    <path d="M 32 256 A 224 224 0 0 1 256 32" stroke="#c084fc" stroke-width="8" stroke-linecap="round" />
+
+                    <!-- Thin Line Markers going to the center -->
+                    <line x1="256" y1="32" x2="256" y2="256" class="stroke-gray-600/50" stroke-width="1" />
+                    <line x1="480" y1="256" x2="256" y2="256" class="stroke-gray-600/50" stroke-width="1" />
+                    <line x1="256" y1="480" x2="256" y2="256" class="stroke-gray-600/50" stroke-width="1" />
+                    <line x1="32" y1="256" x2="256" y2="256" class="stroke-gray-600/50" stroke-width="1" />
+
+                    <!-- The glowing spark that animates along the path -->
+                    <circle cx="0" cy="0" r="10" fill="white" filter="url(#glow)">
+                        <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+                            <mpath href="#motionPath" />
+                        </animateMotion>
+                    </circle>
+                </svg>
+            </div>
+
+            <!-- Inner Static Quadrant Arcs -->
+            <div class="absolute inset-[22%] flex items-center justify-center">
+                <svg class="w-full h-full" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 256 92 A 164 164 0 0 1 420 256" stroke="#38bdf8" stroke-width="24" stroke-linecap="round" />
+                    <path d="M 420 256 A 164 164 0 0 1 256 420" stroke="#34d399" stroke-width="24" stroke-linecap="round" />
+                    <path d="M 256 420 A 164 164 0 0 1 92 256" stroke="#f87171" stroke-width="24" stroke-linecap="round" />
+                    <path d="M 92 256 A 164 164 0 0 1 256 92" stroke="#c084fc" stroke-width="24" stroke-linecap="round" />
+                </svg>
+            </div>
+
+            <!-- Glassmorphism Background -->
+            <div class="absolute inset-[15%] rounded-full border border-white/10 bg-gray-800/30 backdrop-blur-lg"></div>
+
+            <!-- Center Circle -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[35%] h-[35%] rounded-full bg-white/5 backdrop-blur-xl text-white flex items-center justify-center text-center font-bold shadow-2xl z-20 border-2 border-white/20">
+                <span class="text-lg sm:text-xl lg:text-2xl leading-tight">Operational<br />Resilience</span>
+            </div>
+
+
+            <!-- Outer Quadrant Labels with Glassmorphism Effect -->
+            <!-- ASSESS -->
+            <div class="absolute top-[8%] right-[8%] w-48 sm:w-56 text-center group">
+                 <div class="flex flex-col justify-center min-h-[10rem] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-lg transition-all duration-300 hover:bg-white/10 hover:border-white/20">
+                    <div class="text-sky-400 font-extrabold text-lg sm:text-xl mb-2">ASSESS</div>
+                    <p class="text-xs sm:text-sm text-gray-300">Gain deep visibility into your OT systems to identify and baseline critical risks.</p>
+                </div>
+            </div>
+
+            <!-- PRIORITIZE -->
+            <div class="absolute bottom-[8%] right-[8%] w-48 sm:w-56 text-center group">
+                <div class="flex flex-col justify-center min-h-[10rem] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-lg transition-all duration-300 hover:bg-white/10 hover:border-white/20">
+                    <div class="text-emerald-400 font-extrabold text-lg sm:text-xl mb-2">PRIORITIZE</div>
+                    <p class="text-xs sm:text-sm text-gray-300">Transform raw risk data into a strategic, business-driven threat response plan.</p>
+                </div>
+            </div>
+            
+            <!-- PROTECT -->
+            <div class="absolute bottom-[8%] left-[8%] w-48 sm:w-56 text-center group">
+                 <div class="flex flex-col justify-center min-h-[10rem] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-lg transition-all duration-300 hover:bg-white/10 hover:border-white/20">
+                    <div class="text-red-400 font-extrabold text-lg sm:text-xl mb-2">PROTECT</div>
+                    <p class="text-xs sm:text-sm text-gray-300">Deploy robust security controls to safeguard your most critical infrastructure.</p>
+                </div>
+            </div>
+
+            <!-- VALIDATE -->
+            <div class="absolute top-[8%] left-[8%] w-48 sm:w-56 text-center group">
+                 <div class="flex flex-col justify-center min-h-[10rem] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-lg transition-all duration-300 hover:bg-white/10 hover:border-white/20">
+                    <div class="text-purple-400 font-extrabold text-lg sm:text-xl mb-2">VALIDATE</div>
+                    <p class="text-xs sm:text-sm text-gray-300">Continuously audit and validate the effectiveness of your protective measures.</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section 
+      id="about" 
+      class="about bg-transparent py-16 px-0 pl-6 w-full"
+    >
+      <div 
+        class="about__container grid grid-cols-1 md:grid-cols-2 w-full items-center gap-12 text-left pl-6"
+      >
+        <div class="about__left about__content flex flex-col items-start gap-6 text-left w-full"> 
+          <header class="about__header mb-4">
+            <div 
+            class="bg-[var(--primary-color)] text-[var(--secondary-color)] uppercase rounded-md px-2 py-1 text-2xl md:text-3xl font-semibold inline-block shadow mb-2"
+          >
+            Track Record
+          </div>
+            <h2 
+              class="about__subtitle text-4xl lg:text-5xl font-extrabold text-[var(--primary-color)] leading-[1.2] my-2"
+            >
+              MANY CLAIM TO PROTECT.<br>FEW HAVE SUCCEEDED.
+            </h2>
+          </header>
+          <p 
+            class="about__description text-xl md:text-2xl tracking-wide w-full text-[var(--light-text)]"
+          >
+            Obrix stands apart with deep expertise in cybersecurity analytics and real-world threat intelligence. Our technical proficiency in risk modeling, combined with hands-on experience in data-driven security decisions, uniquely positions us to empower clients with top-tier cyber resilience.
+          </p>
+
     </section>
 
     <!-- Features Section -->
-    <section class="main" id="sign-up">
-      <div class="main__container">
-        <div class="main__content">
-          <h1>Our Experience</h1>
-          <h2>Approach</h2>
-          <p>We take a mission-critical view of cybersecurity — delivering tailored, adaptive solutions that align with the real-world demands of critical infrastructure. Our work is grounded in deep expertise, operational alignment, and a relentless focus on risk that matters.</p>
-        </div>
-        <div class="main__img--container">
-          <div class="main__img--card" id="card-2">
-            <i class="fas fa-users"></i>
+          <!-- Grid for statistic cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              <!-- Card 1: Zero Ransoms Paid -->
+              <div class="cyber-card flex flex-col items-center text-center h-full">
+                  <p class="text-sm font-semibold text-gray-400 tracking-wider uppercase">TAKE ZERO CHANCES</p>
+                  <div class="my-6 relative w-28 h-36 flex items-center justify-center">
+                      <div class="absolute top-0 w-full h-full bg-gray-800/50 rounded-lg border-b-2 border-red-500"></div>
+                      <div class="absolute w-full h-1/2 top-0 bg-gray-700/50 rounded-t-lg"></div>
+                      <span class="font-bold text-6xl text-red-400 z-10">75%</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Reduction in Detection-to-Remediation Lifecycle</h3>
+                  <p class="text-gray-400 leading-relaxed text-base">
+                    Attackers can dwell in networks for weeks before detection. We reduce this window by 75% through streamlined security workflows, tool integration, and process hardening, enabling faster threat response and prevention.
+                  </p>
+              </div>
+              <!-- Card 2: Zero Brand Damage -->
+              <div class="cyber-card flex flex-col items-center text-center h-full">
+                  <p class="text-sm font-semibold text-gray-400 tracking-wider uppercase">REDUCE RISK & WORRY</p>
+                  <div class="my-6 relative w-28 h-36 flex items-center justify-center">
+                      <div class="absolute top-0 w-full h-full bg-gray-800/50 rounded-lg border-b-2 border-orange-500"></div>
+                      <div class="absolute w-full h-1/2 top-0 bg-gray-700/50 rounded-t-lg"></div>
+                      <span class="font-bold text-6xl text-orange-400 z-10">95%</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Reduction in Critical Vulnerabilities</h3>
+                  <p class="text-gray-400 leading-relaxed text-base">
+                    Most businesses have critical vulnerabilities lurking in their systems. We help uncover and eliminate these threats through a structured, repeatable process tailored to your environment.
+                  </p>
+              </div>
+              <!-- Card 3: Zero Attacks Missed -->
+              <div class="cyber-card flex flex-col items-center text-center h-full">
+                  <p class="text-sm font-semibold text-gray-400 tracking-wider uppercase">LAST LINE OF DEFENSE</p>
+                  <div class="my-6 relative w-28 h-36 flex items-center justify-center">
+                      <div class="absolute top-0 w-full h-full bg-gray-800/50 rounded-lg border-b-2 border-yellow-500"></div>
+                      <div class="absolute w-full h-1/2 top-0 bg-gray-700/50 rounded-t-lg"></div>
+                      <span class="font-bold text-6xl text-yellow-400 z-10">100%</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Actionable Security Roadmap</h3>
+                  <p class="text-gray-400 leading-relaxed text-base">
+                    Many businesses face uncertainty in cybersecurity investments. We provide a unified roadmap aligned with your budget and goals, giving every strategic client a clear 18 to 24-month plan for maximum impact.
+                  </p>
+              </div>
           </div>
-        </div>
       </div>
     </section>
-
-    <!-- Footer Section -->
-    <footer id="contact" class="contact-section">
-      <div class="container">
-        <div class="contact-header">
-          <span class="tagline">Contact us</span>
-          <h2>Let's talk</h2>
-          <p>To find out more, please email us.</p>
+    <!-- ==== END OF NEW SECTION ==== -->
+    <footer 
+      id="contact" 
+      class="contact-section text-[var(--light-text)] text-base leading-relaxed min-h-[50vh] py-16 px-0 pl-6 w-full"
+    >
+      <div 
+        class="footer__content w-full p-0 pl-6"
+      >
+        <div class="flex flex-col md:flex-row justify-start items-start gap-8">
+          <div class="contact-header mb-8 w-full md:w-1/2"> 
+            <span 
+              class="tagline inline-block bg-[var(--primary-color)] text-[var(--secondary-color)] uppercase rounded-md px-4 py-2 text-2xl font-semibold leading-none shadow"
+            >
+              Contact us
+            </span>
+            <h2 
+              class="text-[var(--primary-color)] uppercase text-4xl lg:text-5xl font-bold mt-4 mb-2" 
+            >
+              Let's talk
+            </h2>
+            <p class="text-inherit w-full"> To find out more, please email us.
+            </p>
+          </div>
+          <div class="contact-info py-2 w-full md:w-auto md:ml-16 md:mt-8">
+            <h3 class="text-xl font-semibold mb-1 text-inherit">Email</h3> <a 
+              href="mailto:info@ludonautics.com?subject=Email%20from%20website" 
+              class="text-inherit hover:text-[var(--primary-color)] underline transition-colors duration-200"
+            >
+              info@obrixsecurity.com
+            </a>
+          </div>
         </div>
-        <div class="contact-info">
-          <h3>Email</h3>
-          <a href="mailto:info@ludonautics.com?subject=Email%20from%20website">info@obrixsecurity.com</a>
+        <div class="flex justify-center py-40">
+          <img src="Root/logo1.png" alt="Obrix Logo" class="h-52 w-auto" />
+        </div>
+        <div class="flex justify-center py-4 border-t border-gray-400 mt-8">
+          <span class="text-sm">© 2025 obrixsecurity. All rights reserved.</span>
         </div>
       </div>
     </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('animation-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
 
-    <script src="app.js"></script>
+      // Responsive sizing
+      function setCanvasSize() {
+        // Use computed style to get actual size
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+
+      // --- Configuration ---
+      const config = {
+          particleColor: `rgba(200, 200, 255, 0.3)`,
+          lineColor: `rgba(200, 200, 255, 0.08)`,
+          particleAmount: 60,
+          defaultRadius: 2,
+          variantRadius: 1,
+          defaultSpeed: 0.5,
+          variantSpeed: 0.5,
+          linkRadius: 180,
+      };
+
+      let particles = [];
+
+      // --- Particle Class ---
+      class Particle {
+          constructor() {
+              this.x = Math.random() * canvas.width;
+              this.y = Math.random() * canvas.height;
+              this.vx = (Math.random() - 0.5) * (config.defaultSpeed + Math.random() * config.variantSpeed);
+              this.vy = (Math.random() - 0.5) * (config.defaultSpeed + Math.random() * config.variantSpeed);
+              this.radius = config.defaultRadius + Math.random() * config.variantRadius;
+          }
+          update() {
+              this.x += this.vx;
+              this.y += this.vy;
+              if (this.x > canvas.width + this.radius) this.x = -this.radius;
+              else if (this.x < -this.radius) this.x = canvas.width + this.radius;
+              if (this.y > canvas.height + this.radius) this.y = -this.radius;
+              else if (this.y < -this.radius) this.y = canvas.height + this.radius;
+          }
+          draw() {
+              ctx.beginPath();
+              ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+              ctx.fillStyle = config.particleColor;
+              ctx.fill();
+          }
+      }
+
+      function setup() {
+          setCanvasSize();
+          particles = [];
+          for (let i = 0; i < config.particleAmount; i++) {
+              particles.push(new Particle());
+          }
+      }
+
+      function drawLinks() {
+          for (let i = 0; i < particles.length; i++) {
+              for (let j = i + 1; j < particles.length; j++) {
+                  const p1 = particles[i];
+                  const p2 = particles[j];
+                  const dx = p1.x - p2.x;
+                  const dy = p1.y - p2.y;
+                  const dist = Math.sqrt(dx * dx + dy * dy);
+                  if (dist < config.linkRadius) {
+                      ctx.beginPath();
+                      ctx.moveTo(p1.x, p1.y);
+                      ctx.lineTo(p2.x, p2.y);
+                      ctx.strokeStyle = config.lineColor.replace('0.15', 1 - dist / config.linkRadius);
+                      ctx.lineWidth = 1;
+                      ctx.stroke();
+                  }
+              }
+          }
+      }
+
+      function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particles.forEach(particle => {
+              particle.update();
+              particle.draw();
+          });
+          drawLinks();
+          requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('resize', () => {
+          setCanvasSize();
+          setup();
+      });
+
+      // --- Initialization ---
+      setCanvasSize();
+      setup();
+      animate();
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.querySelector('a[href="#services"]');
+      if (btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.getElementById('services');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
+    });
+    </script>
   </body>
 </html>
