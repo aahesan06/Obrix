@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define all custom values as standard CSS variables */
+:root {
+  --primary-color: #f1f458;
+  --secondary-color: #0f2d4d;
+  --space-xs: 0.96rem;
+  --space-xxs: 0.6rem;
+}
+
+@layer components {
+  /*
+    This component now uses 100% standard CSS and does not
+    rely on the broken @apply feature. This will work.
+  */
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+    padding-top: var(--space-xxs);
+    padding-bottom: var(--space-xxs);
+    border-radius: 0.375rem; /* This is the CSS for rounded-md */
+    font-weight: 500;       /* This is the CSS for font-medium */
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .btn-primary:hover {
+    background-color: #f3d5a3;
+  }
+}
